@@ -1,4 +1,4 @@
-package my_project.model;
+package my_project.model.queue;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
@@ -38,7 +38,7 @@ public class QueueBall extends GraphicalObject {
      */
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.drawCircle(x,y,20);
+        drawTool.drawCircle(x, y,20);
     }
 
     /**

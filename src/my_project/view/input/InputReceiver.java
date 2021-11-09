@@ -1,4 +1,4 @@
-package my_project.view;
+package my_project.view.input;
 
 import KAGO_framework.control.Interactable;
 import KAGO_framework.control.ViewController;
@@ -11,8 +11,7 @@ import java.awt.event.MouseEvent;
  */
 public class InputReceiver implements Interactable {
 
-    private ProgramController programController;
-    private ViewController viewController;
+    private final ProgramController programController;
 
     /**
      * Objekterzeugung
@@ -21,7 +20,6 @@ public class InputReceiver implements Interactable {
      */
     public InputReceiver(ProgramController programController, ViewController viewController){
         this.programController = programController;
-        this.viewController = viewController;
         viewController.register(this);
     }
 
@@ -37,9 +35,9 @@ public class InputReceiver implements Interactable {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1){ // falls die linke Maustaste geklickt wurde...
+        if(e.getButton() == MouseEvent.BUTTON1){
             programController.addBallToQueue();
-        } else { // falls eine andere Maustaste geklickt wurde
+        } else {
             programController.deleteBallFromQueue();
         }
     }

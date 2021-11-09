@@ -2,8 +2,8 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
-import my_project.model.QueueBall;
-import my_project.view.InputReceiver;
+import my_project.model.queue.QueueBall;
+import my_project.view.input.InputReceiver;
 
 import java.awt.event.MouseEvent;
 
@@ -17,9 +17,9 @@ public class ProgramController {
 
 
     // Referenzen
-    private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
+    private final ViewController viewController;
     private Queue<QueueBall> ballQueue;
-    private QueueBall lastBallinQueue;
+    private QueueBall lastBallInQueue;
 
     /**
      * Konstruktor
@@ -37,17 +37,15 @@ public class ProgramController {
      * Sie erstellt die leeren Datenstrukturen, zu Beginn nur eine Queue
      */
     public void startProgram() {
-        // Für Benutzerinteraktion
-        new InputReceiver(this,viewController); // darf anonym sein, weil kein Zugriff nötig ist
-        // Für die Queue:
+        new InputReceiver(this, viewController);
         ballQueue = new Queue<>();
-        lastBallinQueue = null; // die letzte Kugel muss für die Animation gemerkt werden
+        lastBallInQueue = null;
     }
 
     public void addBallToQueue(){
-        QueueBall newQueueBall = new QueueBall(650,50,lastBallinQueue,viewController);
+        QueueBall newQueueBall = new QueueBall(650,50, lastBallInQueue, viewController);
         ballQueue.enqueue(newQueueBall);
-        lastBallinQueue = newQueueBall;
+        lastBallInQueue = newQueueBall;
     }
 
     public void deleteBallFromQueue(){
