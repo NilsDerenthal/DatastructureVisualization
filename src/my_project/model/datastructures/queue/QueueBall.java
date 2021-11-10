@@ -1,4 +1,4 @@
-package my_project.model.queue;
+package my_project.model.datastructures.queue;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;

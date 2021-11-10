@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
  * Realisiert ein Objekt, dass alle Eingaben empfängt und dann danach passende Methoden
  * im ProgramController aufruft
  */
-public class InputReceiver implements Interactable {
+public class InputReceiver extends InteractableAdapter {
 
     private final ProgramController programController;
 
@@ -24,41 +24,11 @@ public class InputReceiver implements Interactable {
     }
 
     @Override
-    public void keyPressed(int key) {
-
-    }
-
-    @Override
-    public void keyReleased(int key) {
-
-    }
-
-    @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1){
+        if (e.getButton() == MouseEvent.BUTTON1){
             programController.addBallToQueue();
-        } else {
+        } else if (e.getButton() == MouseEvent.BUTTON2){
             programController.deleteBallFromQueue();
         }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 }

@@ -2,8 +2,10 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
-import my_project.model.queue.QueueBall;
+import my_project.model.datastructures.queue.QueueBall;
 import my_project.view.input.InputReceiver;
+import my_project.view.visuals.components.ButtonFactory;
+import my_project.view.visuals.panes.Menu;
 
 import java.awt.event.MouseEvent;
 
@@ -40,6 +42,8 @@ public class ProgramController {
         new InputReceiver(this, viewController);
         ballQueue = new Queue<>();
         lastBallInQueue = null;
+
+        viewController.draw(ButtonFactory.get(viewController));
     }
 
     public void addBallToQueue(){
@@ -68,5 +72,25 @@ public class ProgramController {
      */
     public void updateProgram(double dt){
 
+    }
+
+    /**
+     * Wrapper for the scene index
+     */
+    public enum Scene {
+        MENU(0),
+        STACK(1),
+        LIST(2),
+        QUEUE(3);
+
+        private final int index;
+
+        Scene(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
     }
 }
