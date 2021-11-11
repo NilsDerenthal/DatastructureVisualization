@@ -2,10 +2,11 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
-import my_project.model.datastructures.queue.QueueBall;
-import my_project.view.input.InputReceiver;
-import my_project.view.visuals.components.ButtonFactory;
-import my_project.view.visuals.panes.Menu;
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
+import my_project.view.input.StackInputReciever;
+import my_project.view.visuals.components.QueueBall;
+import my_project.view.input.QueueInputReciever;
+import my_project.view.visuals.components.StackElement;
 
 import java.awt.event.MouseEvent;
 
@@ -16,12 +17,19 @@ import java.awt.event.MouseEvent;
 public class ProgramController {
 
     //Attribute
+    private final int
+            MENU = 0,
+            QUEUE = 1,
+            STACK = 2,
+            LIST = 3;
 
 
     // Referenzen
     private final ViewController viewController;
     private Queue<QueueBall> ballQueue;
     private QueueBall lastBallInQueue;
+
+    private Stack<StackElement> stack;
 
     /**
      * Konstruktor
@@ -39,11 +47,18 @@ public class ProgramController {
      * Sie erstellt die leeren Datenstrukturen, zu Beginn nur eine Queue
      */
     public void startProgram() {
-        new InputReceiver(this, viewController);
+        viewController.register(new QueueInputReciever(this));
+        viewController.register(new StackInputReciever(this));
         ballQueue = new Queue<>();
+        stack = new Stack<>();
         lastBallInQueue = null;
+    }
 
-        viewController.draw(ButtonFactory.get(viewController));
+    public void addToStack () {
+        int newY = stack.isEmpty() ? 40 : (int) (stack.top().getY() + 7);
+        StackElement newElement = new StackElement(0, newY);
+        viewController.draw(newElement);
+        stack.push(newElement);
     }
 
     public void addBallToQueue(){
@@ -58,39 +73,17 @@ public class ProgramController {
         }
     }
 
+
+    // ignored
     /**
      * Aufruf bei Mausklick
      * @param e das Objekt enthält alle Informationen zum Klick
      */
-    public void mouseClicked(MouseEvent e){
-
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     /**
      * Aufruf mit jeder Frame
      * @param dt Zeit seit letzter Frame
      */
-    public void updateProgram(double dt){
-
-    }
-
-    /**
-     * Wrapper for the scene index
-     */
-    public enum Scene {
-        MENU(0),
-        STACK(1),
-        LIST(2),
-        QUEUE(3);
-
-        private final int index;
-
-        Scene(int index) {
-            this.index = index;
-        }
-
-        public int getIndex() {
-            return index;
-        }
-    }
+    public void updateProgram(double dt) {}
 }

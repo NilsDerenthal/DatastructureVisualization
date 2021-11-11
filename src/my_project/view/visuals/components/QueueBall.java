@@ -1,4 +1,4 @@
-package my_project.model.datastructures.queue;
+package my_project.view.visuals.components;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
@@ -10,8 +10,8 @@ import KAGO_framework.view.DrawTool;
  */
 public class QueueBall extends GraphicalObject {
 
-    private ViewController viewController;
-    private QueueBall previousQueueBall; // Vorgänger des QueueBalls
+    private final ViewController viewController;
+    private final QueueBall previousQueueBall; // Vorgänger des QueueBalls
     private boolean arrived; // hat der QueueBall den Anfang der Schlange erreicht?
     private boolean deleted; // wurde der QueueBall aus der Schlange gelöscht?
 
@@ -49,8 +49,12 @@ public class QueueBall extends GraphicalObject {
     @Override
     public void update(double dt){
         if(!arrived){
-            if(previousQueueBall == null || x > previousQueueBall.getX()+50) x -= 100*dt;
-            if (x < 100) arrived = true;
+            if(previousQueueBall == null || x > previousQueueBall.getX()+50) {
+                x -= 500*dt;
+            }
+            if (x < 100) {
+                arrived = true;
+            }
         }
         if(deleted){
             x -= 200*dt;
