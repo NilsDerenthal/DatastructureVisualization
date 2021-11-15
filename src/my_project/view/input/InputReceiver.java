@@ -16,7 +16,6 @@ public abstract class InputReceiver extends InteractableAdapter {
     /**
      * Objekterzeugung
      * @param programController Nötig als Objekt vom Controllerbereich, das informiert wird
-     * @param viewController Nötig, um den Aufruf der Interface-Methoden sicherzustellen
      */
     public InputReceiver (ProgramController programController){
         this.programController = programController;

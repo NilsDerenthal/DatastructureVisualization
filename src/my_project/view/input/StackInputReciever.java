@@ -16,8 +16,10 @@ public class StackInputReciever extends InputReceiver{
 
     @Override
     public void keyPressed(int key) {
-        if (key == KeyEvent.VK_LEFT) {
-            programController.addToStack();
+        switch (key) {
+            case KeyEvent.VK_RIGHT -> programController.addToStack();
+            case KeyEvent.VK_LEFT -> programController.removeFromStack();
+            case KeyEvent.VK_SPACE -> programController.changeTopOfStack();
         }
     }
 }

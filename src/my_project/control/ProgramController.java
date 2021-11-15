@@ -49,20 +49,35 @@ public class ProgramController {
     public void startProgram() {
         viewController.register(new QueueInputReciever(this));
         viewController.register(new StackInputReciever(this));
+
         ballQueue = new Queue<>();
         stack = new Stack<>();
         lastBallInQueue = null;
     }
 
-    public void addToStack () {
-        int newY = stack.isEmpty() ? 40 : (int) (stack.top().getY() + 7);
-        StackElement newElement = new StackElement(0, newY);
-        viewController.draw(newElement);
+    public void addToStack() {
+        // ugly
+        int newY = stack.isEmpty() ? 300 : (int) (stack.top().getY() - 12);
+
+        StackElement newElement = new StackElement(viewController, -10, newY);
         stack.push(newElement);
     }
 
+    public void removeFromStack() {
+        if (!stack.isEmpty()) {
+            if (stack.top().remove())
+                stack.pop();
+        }
+    }
+
+    public void changeTopOfStack() {
+        if (!stack.isEmpty()) {
+            stack.top().changeColor();
+        }
+    }
+
     public void addBallToQueue(){
-        QueueBall newQueueBall = new QueueBall(650,50, lastBallInQueue, viewController);
+        QueueBall newQueueBall = new QueueBall(650, 50, lastBallInQueue, viewController);
         ballQueue.enqueue(newQueueBall);
         lastBallInQueue = newQueueBall;
     }
