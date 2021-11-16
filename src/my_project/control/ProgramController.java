@@ -56,8 +56,13 @@ public class ProgramController {
     }
 
     public void addToStack() {
-        // ugly
-        int newY = stack.isEmpty() ? 300 : (int) (stack.top().getY() - 12);
+        int newY;
+
+        if (stack.isEmpty()) {
+            newY = 350;
+        } else {
+            newY = (int) (stack.top().getY() - 1);
+        }
 
         StackElement newElement = new StackElement(viewController, -10, newY);
         stack.push(newElement);

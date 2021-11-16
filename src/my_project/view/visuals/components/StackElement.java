@@ -21,7 +21,7 @@ public class StackElement extends GraphicalObject {
         this.viewController = viewController;
         this.x = x;
         this.y = y;
-        color = Color.BLACK;
+        changeColor();
         leaving = false;
         viewController.draw(this);
     }
@@ -29,7 +29,7 @@ public class StackElement extends GraphicalObject {
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(color);
-        drawTool.drawFilledRectangle(x, y, 40, 10);
+        drawTool.drawFilledRectangle(x, y, 500, 1);
     }
 
     @Override
@@ -51,10 +51,9 @@ public class StackElement extends GraphicalObject {
 
     public void changeColor () {
         Random generator = new Random();
-        float r = generator.nextFloat();
-        float g = generator.nextFloat();
-        float b = generator.nextFloat();
-        color = new Color(r, g, b);
+        float hue = generator.nextFloat();
+
+        color = Color.getHSBColor(hue, 1, 1);
     }
 
     public boolean remove () {
