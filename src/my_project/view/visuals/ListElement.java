@@ -18,12 +18,12 @@ public class ListElement extends GraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
-
         if (prev != null) {
             x = (int) (prev.getX() + 20);
         } else {
             x = 100;
         }
+
         drawTool.drawRectangle(x, y, width, height);
     }
 

@@ -108,7 +108,7 @@ public class ProgramController {
 
     public void append() {
         boolean empty = list.isEmpty();
-        System.out.println("appending");
+
         list.append(new ListElement(viewController, getPrev()));
 
         if (empty) {
@@ -139,6 +139,7 @@ public class ProgramController {
             prev = list.getContent();
             list.next();
         }
+
         list.next();
         return prev;
     }
