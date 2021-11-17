@@ -1,4 +1,4 @@
-package my_project.view.visuals.components;
+package my_project.view.visuals;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
@@ -69,7 +69,7 @@ public class QueueBall extends GraphicalObject {
     public boolean tryToDelete(){
         if(arrived){
             deleted = true;
-            return deleted;
+            return true;
         }
         return false;
     }

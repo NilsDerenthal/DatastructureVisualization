@@ -1,12 +1,14 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
-import my_project.view.input.StackInputReciever;
-import my_project.view.visuals.components.QueueBall;
-import my_project.view.input.QueueInputReciever;
-import my_project.view.visuals.components.StackElement;
+import my_project.view.input.ListInputReciever;
+import my_project.view.visuals.ListElement;
+import my_project.view.visuals.ListPointer;
+import my_project.view.visuals.QueueBall;
+import my_project.view.visuals.StackElement;
 
 import java.awt.event.MouseEvent;
 
@@ -30,6 +32,11 @@ public class ProgramController {
     private QueueBall lastBallInQueue;
 
     private Stack<StackElement> stack;
+    private List<ListElement> list;
+
+    private ListPointer pointer;
+
+
 
     /**
      * Konstruktor
@@ -47,11 +54,17 @@ public class ProgramController {
      * Sie erstellt die leeren Datenstrukturen, zu Beginn nur eine Queue
      */
     public void startProgram() {
-        viewController.register(new QueueInputReciever(this));
-        viewController.register(new StackInputReciever(this));
+        //viewController.register(new QueueInputReciever(this));
+        //viewController.register(new StackInputReciever(this));
+        viewController.register(new ListInputReciever(this));
 
         ballQueue = new Queue<>();
         stack = new Stack<>();
+        list = new List<>();
+        pointer = new ListPointer();
+
+        viewController.draw(pointer);
+
         lastBallInQueue = null;
     }
 
@@ -61,7 +74,7 @@ public class ProgramController {
         if (stack.isEmpty()) {
             newY = 350;
         } else {
-            newY = (int) (stack.top().getY() - 1);
+            newY = stack.top().getYOfNext();
         }
 
         StackElement newElement = new StackElement(viewController, -10, newY);
@@ -93,6 +106,42 @@ public class ProgramController {
         }
     }
 
+    public void append() {
+        boolean empty = list.isEmpty();
+        System.out.println("appending");
+        list.append(new ListElement(viewController, getPrev()));
+
+        if (empty) {
+            list.toFirst();
+            pointer.setCur(list.getContent());
+        }
+    }
+
+    public void change () {
+        // TODO
+    }
+    public void remove() {
+        list.remove();
+    }
+
+    public void moveOnList() {
+        list.next();
+        pointer.setCur(list.getContent());
+    }
+
+    private ListElement getPrev() {
+        ListElement toReturnBackTo = list.getContent();
+        list.toFirst();
+
+        ListElement prev = null;
+
+        while (list.getContent() != null && list.getContent() != toReturnBackTo) {
+            prev = list.getContent();
+            list.next();
+        }
+        list.next();
+        return prev;
+    }
 
     // ignored
     /**

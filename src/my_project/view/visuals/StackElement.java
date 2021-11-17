@@ -1,4 +1,4 @@
-package my_project.view.visuals.components;
+package my_project.view.visuals;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
@@ -13,23 +13,31 @@ public class StackElement extends GraphicalObject {
     private boolean leaving;
     private Color color;
 
-    private final static int
-            SPEED = 200,
-            STOP = 100;
+    public final static int
+            SPEED = 700,
+            STOP = 100,
+            WIDTH = 100,
+            HEIGHT = 10;
 
     public StackElement(ViewController viewController, int x, int y) {
         this.viewController = viewController;
+
         this.x = x;
         this.y = y;
+        this.width = WIDTH;
+        this.height = HEIGHT;
+
         changeColor();
+
         leaving = false;
+
         viewController.draw(this);
     }
 
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(color);
-        drawTool.drawFilledRectangle(x, y, 500, 1);
+        drawTool.drawFilledRectangle(x, y, width, height);
     }
 
     @Override
@@ -38,7 +46,7 @@ public class StackElement extends GraphicalObject {
             x += SPEED * dt;
         } else {
             if (leaving) {
-                x += SPEED * 3 * dt;
+                x += SPEED * dt;
 
                 if (x > 3 * STOP) {
                     viewController.removeDrawable(this);
@@ -60,5 +68,9 @@ public class StackElement extends GraphicalObject {
         if (x == STOP)
             leaving = true;
         return leaving;
+    }
+
+    public int getYOfNext() {
+        return (int) (y - HEIGHT - 2);
     }
 }
