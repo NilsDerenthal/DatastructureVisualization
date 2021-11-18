@@ -19,6 +19,8 @@ public class ListInputReciever extends InputReceiver {
         switch (key) {
             case KeyEvent.VK_RIGHT -> programController.moveOnList();
             case KeyEvent.VK_SPACE -> programController.append();
+            case KeyEvent.VK_C -> programController.change();
+            case KeyEvent.VK_L -> programController.remove();
         }
     }
 }

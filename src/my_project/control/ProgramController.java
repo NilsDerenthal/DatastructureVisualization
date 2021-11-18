@@ -118,30 +118,37 @@ public class ProgramController {
     }
 
     public void change () {
-        // TODO
+        list.getContent().change();
     }
+
     public void remove() {
+        list.getContent().remove();
         list.remove();
+        if (!list.hasAccess()) {
+            list.toFirst();
+        }
+        pointer.setCur(list.getContent());
     }
 
     public void moveOnList() {
         list.next();
+        if (!list.hasAccess()) {
+            list.toFirst();
+        }
         pointer.setCur(list.getContent());
     }
 
     private ListElement getPrev() {
         ListElement toReturnBackTo = list.getContent();
+        list.toLast();
+        ListElement last = list.getContent();
         list.toFirst();
 
-        ListElement prev = null;
-
-        while (list.getContent() != null && list.getContent() != toReturnBackTo) {
-            prev = list.getContent();
+        while (list.getContent() != toReturnBackTo) {
             list.next();
         }
 
-        list.next();
-        return prev;
+        return last;
     }
 
     // ignored
