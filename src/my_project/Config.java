@@ -1,5 +1,7 @@
 package my_project;
 
+import my_project.view.visuals.ArrayElement;
+
 /**
  * In dieser Klasse werden globale, statische Einstellungen verwaltet.
  * Die Werte können nach eigenen Wünschen angepasst werden.

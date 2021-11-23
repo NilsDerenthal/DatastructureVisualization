@@ -45,7 +45,7 @@ public class ListElement extends GraphicalObject {
         if (alpha < 256 && alpha >= 0) {
             alpha = !leaving ?
                     (int) Math.min(alpha + 255 * 1.5 * dt, 255) :
-                    (int) Math.max(alpha - 255 * 1.5 * dt, 0);
+                    (int) Math.max(alpha - 255 * 3 * dt, 0);
         }
 
         if (leaving) {

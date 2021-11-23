@@ -4,11 +4,8 @@ import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
-import my_project.view.input.ListInputReciever;
-import my_project.view.visuals.ListElement;
-import my_project.view.visuals.ListPointer;
-import my_project.view.visuals.QueueBall;
-import my_project.view.visuals.StackElement;
+import my_project.view.input.ArrayInputReciever;
+import my_project.view.visuals.*;
 
 import java.awt.event.MouseEvent;
 
@@ -36,6 +33,7 @@ public class ProgramController {
 
     private ListPointer pointer;
 
+    private ArrayVisualization arrVis;
 
 
     /**
@@ -56,12 +54,14 @@ public class ProgramController {
     public void startProgram() {
         //viewController.register(new QueueInputReciever(this));
         //viewController.register(new StackInputReciever(this));
-        viewController.register(new ListInputReciever(this));
+        //viewController.register(new ListInputReciever(this));
+        viewController.register(new ArrayInputReciever(this));
 
         ballQueue = new Queue<>();
         stack = new Stack<>();
         list = new List<>();
         pointer = new ListPointer();
+        arrVis = new ArrayVisualization(viewController);
 
         viewController.draw(pointer);
 
@@ -104,6 +104,23 @@ public class ProgramController {
         if(!ballQueue.isEmpty()){
             if(ballQueue.front().tryToDelete()) ballQueue.dequeue();
         }
+    }
+
+    public void moveOnArray(int amountX, int amountY) {
+        arrVis.changePointerX(amountX);
+        arrVis.changePointerY(amountY);
+    }
+
+    public void changeArr() {
+        arrVis.get().setColor();
+    }
+
+    public void del() {
+        arrVis.del();
+    }
+
+    public void add() {
+        arrVis.set();
     }
 
     public void append() {
