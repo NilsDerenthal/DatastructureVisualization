@@ -25,6 +25,8 @@ public class ArrayInputReciever extends InputReceiver{
             case KeyEvent.VK_SPACE -> programController.changeArr();
 
             case KeyEvent.VK_D -> programController.del();
+            case KeyEvent.VK_A -> programController.add();
+
         }
     }
 }

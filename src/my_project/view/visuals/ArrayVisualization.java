@@ -22,7 +22,6 @@ public class ArrayVisualization extends GraphicalObject {
 
     @Override
     public void draw(DrawTool drawTool) {
-
         forEach((i, j) -> {
             drawTool.setCurrentColor(100, 100, 100, 255);
             if (i == pointerX && j == pointerY) {
@@ -32,7 +31,9 @@ public class ArrayVisualization extends GraphicalObject {
             }
 
             drawTool.setCurrentColor(0, 0, 0, 255);
-            arr[i][j].draw(drawTool);
+            if (arr[i][j] != null) {
+                arr[i][j].draw(drawTool);
+            }
         });
     }
 
@@ -45,11 +46,15 @@ public class ArrayVisualization extends GraphicalObject {
     }
 
     public void changePointerX(int amount) {
-        this.pointerX += amount;
+        int newAmount = pointerX + amount;
+        if (newAmount < arr.length && newAmount >= 0)
+            this.pointerX = newAmount;
     }
 
     public void changePointerY(int amount) {
-        this.pointerY += amount;
+        int newAmount = pointerY + amount;
+        if (newAmount < arr[0].length && newAmount >= 0)
+            this.pointerY = newAmount;
     }
 
     public ArrayElement get () {
@@ -57,7 +62,8 @@ public class ArrayVisualization extends GraphicalObject {
     }
 
     public void set() {
-        arr[pointerX][pointerY] = new ArrayElement(pointerX, pointerY);
+        if (arr[pointerX][pointerY] == null)
+            arr[pointerX][pointerY] = new ArrayElement(pointerX * WIDTH + WIDTH, pointerY * WIDTH + WIDTH);
     }
 
     @Override
